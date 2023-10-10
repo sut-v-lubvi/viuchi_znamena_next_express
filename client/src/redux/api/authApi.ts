@@ -5,7 +5,7 @@ import { TestType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsDa
 
 export const authApi = createApi({
   reducerPath: "auth",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://test-crlu.onrender.com/api" }),
   endpoints: (build) => ({
     register: build.mutation<IGenericResponse, LoginInput>({
       query: (body) => ({

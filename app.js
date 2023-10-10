@@ -3,7 +3,7 @@ const config = require("config");
 const mongoose = require("mongoose");
 
 const app = express();
-
+app.use(cors());
 app.use(express.json({ extend: true }));
 
 app.use("/api/auth", require("./routes/auth.routs"));
