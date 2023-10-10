@@ -3,6 +3,7 @@ import { testSlice } from "../features/currentTestState";
 import { addTestSlice } from "../features/addTest";
 import { authApi } from "../api/authApi";
 import { testApi } from "../api/testApi";
+import { userSlice } from "../features/userSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     addTestSlice: addTestSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [testApi.reducerPath]: testApi.reducer,
+    user: userSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

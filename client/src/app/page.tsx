@@ -3,6 +3,7 @@
 import { Title } from "@/widgets/Finish/style";
 import { Red } from "@/widgets/Header/style";
 import { Description } from "./style";
+import { useAuth } from "@/shared/hooks/useAuth";
 
 export default function Home() {
   return (

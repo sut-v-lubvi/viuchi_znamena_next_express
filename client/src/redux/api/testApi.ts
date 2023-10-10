@@ -6,7 +6,10 @@ export const testApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (build) => ({
     getTests: build.query({
-      query: () => `getTests`,
+      query: () => ({
+        url: "getTests",
+        credentials: "include",
+      }),
     }),
   }),
 });
