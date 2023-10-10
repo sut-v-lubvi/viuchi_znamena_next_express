@@ -23,7 +23,7 @@ export default function AuthForm() {
     formState: { errors, isSubmitSuccessful },
   } = useForm<LoginInput>();
 
-  const [addRegister, { isError, error }] = useRegisterMutation();
+  const [addRegister, { isError, error }] = useRegisterMutation<any>();
   const [addLogin, { data }] = useIsLoginMutation();
   const onSubmit: SubmitHandler<LoginInput> = (dataLog) => {
     addLogin(dataLog).unwrap();

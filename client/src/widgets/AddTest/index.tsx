@@ -40,7 +40,7 @@ export default memo(function TestForm() {
   const { addTest, addQuestions, deleteAllQuestions } = useActions();
 
   const [addTestQuery, { isLoading, error, isError, status }] =
-    useAddNewTestMutation();
+    useAddNewTestMutation<any>();
   console.log(status);
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     addTest(data);
@@ -114,7 +114,9 @@ export default memo(function TestForm() {
         {status === "uninitialized" ? (
           <></>
         ) : isError ? (
-          <Alert severity="error">{error.data.message}</Alert>
+          <Alert severity="error">
+            Что то пошло не так. Попробуйте ещё раз.
+          </Alert>
         ) : (
           <Alert severity="success">Тест успешно добавлен</Alert>
         )}

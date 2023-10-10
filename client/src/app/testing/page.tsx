@@ -12,7 +12,7 @@ export type TestListT = {
 };
 
 export default function TestsList() {
-  const { data, error } = useGetTestsQuery();
+  const { data, error } = useGetTestsQuery("");
   console.log(data);
   const [testsList, setTestList] = useState<TestListT[] | null>(null);
 
