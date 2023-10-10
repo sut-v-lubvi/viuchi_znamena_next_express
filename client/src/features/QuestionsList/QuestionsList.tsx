@@ -8,7 +8,6 @@ import { Button } from "@mui/material";
 export const QuestionList = () => {
   const { questions } = useAppSelector((state) => state.addTestSlice);
   const { deleteQuestions } = useActions();
-  console.log(questions);
 
   return (
     <Container>

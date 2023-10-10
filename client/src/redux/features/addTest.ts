@@ -1,7 +1,14 @@
 import { TestType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 import { testScore } from "@/shared/utils/testScore";
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { useAddNewTestMutation } from "../api/authApi";
+import { useDispatch } from "react-redux";
+
+export const addNewPost = createAsyncThunk(
+  "posts/addNewPost",
+  async function () {}
+);
 
 export interface AddTestI extends TestType {
   numberQuestions: number;
@@ -23,7 +30,6 @@ export const addTestSlice = createSlice({
   initialState,
   reducers: {
     addTest: (state, { payload }) => {
-      debugger;
       (state.id = 0), (state.name = payload.name);
       state.icon = payload.icon;
       for (let i = 1; i <= state.questions.length; i++) {
@@ -63,6 +69,14 @@ export const addTestSlice = createSlice({
         return e.id !== minimal[0];
       });
     },
+    deleteAllQuestions: (state) => {
+      state.questions = [];
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase("test/addTest", (state, action) => {
+      debugger;
+    });
   },
 });
 

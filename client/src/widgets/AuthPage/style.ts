@@ -11,3 +11,7 @@ export const ButtonLog = styled.div`
   gap: 20px;
   justify-content: center;
 `;
+export const Error = styled.div`
+  font-size: 14px;
+  color: red;
+`;

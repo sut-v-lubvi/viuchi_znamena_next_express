@@ -1,18 +1,8 @@
 "use client";
 import { getTestList } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/fakeAPI";
-import {
-  Container,
-  ContainerTests,
-  Description,
-  Line,
-  LinkTest,
-  P,
-  Test,
-} from "./style";
 import { useEffect, useState } from "react";
-import { type } from "os";
-import { Kruk } from "@/widgets/NavMenu/style";
 import TestItem from "@/features/testItem";
+import { useGetTestsQuery } from "@/redux/api/testApi";
 
 export type TestListT = {
   name: string;
@@ -20,24 +10,30 @@ export type TestListT = {
   icon: string;
   description: string;
 };
+
 export default function TestsList() {
-  const [testsList, setTestList] = useState<TestListT[]>(getTestList());
+  const { data, error } = useGetTestsQuery();
+  console.log(data);
+  const [testsList, setTestList] = useState<TestListT[] | null>(null);
 
   useEffect(() => {
-    setTestList(getTestList());
-  }, []);
+    if (data) {
+      setTestList(getTestList(data));
+    }
+  }, [data]);
 
   return (
     <>
-      {testsList.map((e) => (
-        <TestItem
-          key={e.id}
-          id={e.id}
-          icon={e.icon}
-          name={e.name}
-          description={e.description}
-        />
-      ))}
+      {testsList &&
+        testsList.map((e) => (
+          <TestItem
+            key={e.id}
+            id={e.id}
+            icon={e.icon}
+            name={e.name}
+            description={e.description}
+          />
+        ))}
     </>
   );
 }

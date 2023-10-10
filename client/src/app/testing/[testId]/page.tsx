@@ -9,6 +9,7 @@ import {
 import Questions from "@/widgets/Questions";
 import { useActions } from "@/redux/hooks/useActions";
 import { useRouter } from "next/navigation";
+import { useGetTestsQuery } from "@/redux/api/testApi";
 
 interface Props {
   params: {
@@ -18,33 +19,39 @@ interface Props {
 
 export default function Test({ params: { testId } }: Props) {
   const router = useRouter();
-  const [currentTest, setCurrentTest] = useState<TestType | any>(
-    getCurrentTest(testId)
-  );
+  const { data, error, isSuccess } = useGetTestsQuery("");
+  const [currentTest, setCurrentTest] = useState<TestType | null>(null);
   const [questionTestId, setQuestionTestId] = useState<number>(0);
-  const [currentQuestion, setCurrentQuestion] = useState<QuestionType>(
-    currentTest.questions[questionTestId]
-  );
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>();
+
+  useEffect(() => {
+    if (data) {
+      setCurrentTest(getCurrentTest(data, testId));
+    }
+  }, [data, testId]);
+
   const { addTestResult, addTestTime } = useActions();
   useEffect(() => {
-    if (questionTestId > currentTest.questions.length - 1) {
-      addTestResult({
-        id: testId,
-        name: currentTest.name,
-        lengthTest: currentTest.questions.length,
-      });
-      router.push("/testing/[testId]/finish");
-    } else {
-      setCurrentQuestion(currentTest.questions[questionTestId]);
+    if (currentTest) {
+      if (questionTestId > currentTest.questions.length - 1) {
+        addTestResult({
+          id: testId,
+          name: currentTest.name,
+          lengthTest: currentTest.questions.length,
+        });
+        router.push("/testing/[testId]/finish");
+      } else {
+        setCurrentQuestion(currentTest.questions[questionTestId]);
+      }
     }
-  }, [questionTestId]);
-
-  return (
-    <Questions
-      numberQuestions={currentTest.questions.length}
-      questionTestId={questionTestId}
-      currentQuestion={currentQuestion}
-      setQuestionTestId={setQuestionTestId}
-    />
-  );
+  }, [questionTestId, currentTest]);
+  if (currentTest && currentQuestion)
+    return (
+      <Questions
+        numberQuestions={currentTest.questions.length}
+        questionTestId={questionTestId}
+        currentQuestion={currentQuestion}
+        setQuestionTestId={setQuestionTestId}
+      />
+    );
 }

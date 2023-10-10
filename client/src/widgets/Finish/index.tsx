@@ -19,6 +19,7 @@ import { memo } from "react";
 import { useBass } from "@/shared/hooks/useBass";
 import { currentTestState } from "@/redux/features/currentTestState";
 import { Time } from "@/features/counter/timer";
+import { Alert, AlertTitle } from "@mui/material";
 
 export default memo(function Finish({
   id,

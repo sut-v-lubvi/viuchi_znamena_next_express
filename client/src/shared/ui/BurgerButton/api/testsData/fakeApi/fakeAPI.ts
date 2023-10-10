@@ -1,24 +1,20 @@
-import { dataTests } from "./testsData";
+import { TestType, dataTests } from "./testsData";
 
-export const getTestList = () => {
+export const getTestList = (data: TestType[]) => {
   console.log("getTestList");
   let testListArr = [];
-  for (let i = 0; i < dataTests.tests.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     testListArr.push({
-      name: dataTests.tests[i].name,
+      name: data[i].name,
       id: i,
-      icon: dataTests.tests[i].icon,
-      description: dataTests.tests[i].description,
+      icon: data[i].icon,
+      description: data[i].description,
     });
   }
   return testListArr;
 };
 
-export const getCurrentTest = (TestId: string) => {
-  const test = dataTests.tests.find((item) => item.id === Number(TestId));
-  if (test === undefined) {
-    return {};
-  } else {
-    return test;
-  }
+export const getCurrentTest = (data: TestType[], TestId: string) => {
+  const test = data[Number(TestId)];
+  return test;
 };
