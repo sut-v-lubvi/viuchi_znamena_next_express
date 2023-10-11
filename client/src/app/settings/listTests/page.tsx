@@ -17,7 +17,7 @@ import { Kruk } from "@/widgets/NavMenu/style";
 import { useDeleteTestMutation, useGetTestsQuery } from "@/redux/api/testApi";
 import { Body, Container } from "./style";
 
-export default function testList() {
+export default function TestList() {
   const { data } = useGetTestsQuery();
   const [deleteTest, { isError, isSuccess, error }] = useDeleteTestMutation();
 
