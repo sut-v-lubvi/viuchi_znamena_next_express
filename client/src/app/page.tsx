@@ -14,7 +14,6 @@ export default memo(function Home() {
   const { setAuthenticated } = useActions();
   const { isAuthenticated } = useAppSelector((state) => state.user);
   useEffect(() => {
-    debugger;
     const token = localStorage.getItem("token");
     if (token) {
       setAuthenticated(true);
@@ -23,6 +22,7 @@ export default memo(function Home() {
     }
   }, []);
   console.log(isAuthenticated);
+
   if (isAuthenticated === false) {
     redirect("/auth/login");
   }

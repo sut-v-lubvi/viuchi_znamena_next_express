@@ -8,7 +8,6 @@ export const testApi = createApi({
     getTests: build.query({
       query: () => ({
         url: "getTests",
-        credentials: "include",
       }),
     }),
   }),

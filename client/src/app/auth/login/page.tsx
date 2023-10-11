@@ -1,8 +1,8 @@
 "use client";
 import TextField from "@mui/material/TextField";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ButtonLog, Error, FormTest } from "./style";
-import { Button } from "@mui/material";
+import { ButtonLog, Error, FormTest, Progress } from "./style";
+import { Button, CircularProgress } from "@mui/material";
 import { useIsLoginMutation } from "@/redux/api/authApi";
 import { error } from "console";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ export default function AuthForm() {
     formState: { errors, isSubmitSuccessful },
   } = useForm<LoginInput>();
   const router = useRouter();
-  const [addLogin, { isError, error }] = useIsLoginMutation<any>();
+  const [addLogin, { isError, error, isLoading }] = useIsLoginMutation<any>();
   const { setAuthenticated } = useActions();
   const onSubmit: SubmitHandler<LoginInput> = async (dataLog) => {
     try {
@@ -33,6 +33,7 @@ export default function AuthForm() {
       console.log(response.token);
       localStorage.setItem("token", response.token);
       console.log("Login successful");
+      setAuthenticated(true);
       router.push("/");
     } catch (error) {
       console.error("Error logging in:", error);
@@ -74,9 +75,14 @@ export default function AuthForm() {
         )}
         {error && <Error>{errorMessage}</Error>}
         <ButtonLog>
-          <Button variant="contained" type="submit">
-            Войти
-          </Button>
+          {isLoading ? (
+            <Progress></Progress>
+          ) : (
+            <Button variant="contained" type="submit">
+              Войти
+            </Button>
+          )}
+
           <Button>
             <Link href={"/auth/registration"}>Зарегестрироваться</Link>
           </Button>

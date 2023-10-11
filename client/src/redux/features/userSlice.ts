@@ -30,7 +30,6 @@ export const userSlice = createSlice({
       state.id = null;
     },
     setAuthenticated: (state, action: PayloadAction<boolean>) => {
-      debugger;
       state.isAuthenticated = action.payload;
     },
     logout: (state) => {

@@ -2,13 +2,12 @@
 import TextField from "@mui/material/TextField";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@mui/material";
-import { useRegisterMutation, useIsLoginMutation } from "@/redux/api/authApi";
+import { useRegisterMutation } from "@/redux/api/authApi";
 import { error } from "console";
 import { useEffect, useState } from "react";
-import { useActions } from "@/redux/hooks/useActions";
 import { useRouter } from "next/navigation";
 import { HeaderTitle } from "@/widgets/Header/style";
-import { ButtonLog, Error, FormTest } from "../login/style";
+import { ButtonLog, Error, FormTest, Progress } from "../login/style";
 
 export type RegisterInput = {
   name: string;
@@ -26,7 +25,7 @@ export default function AuthForm() {
   } = useForm<RegisterInput>();
 
   const router = useRouter();
-  const [addRegister, { isError, error, isSuccess }] =
+  const [addRegister, { isError, error, isSuccess, isLoading }] =
     useRegisterMutation<any>();
 
   const onSubmit: SubmitHandler<RegisterInput> = async (dataReg) => {
@@ -50,7 +49,7 @@ export default function AuthForm() {
           id="name"
           label="name "
           variant="outlined"
-          {...register("email", { required: "Поле обязательно к заполнению" })}
+          {...register("name", { required: "Поле обязательно к заполнению" })}
         />
         <TextField
           error={isError}
@@ -78,9 +77,13 @@ export default function AuthForm() {
         )}
         {error && <Error>{errorMessage}</Error>}
         <ButtonLog>
-          <Button variant="contained" color="warning" type="submit">
-            Зарегестрироваться
-          </Button>
+          {isLoading ? (
+            <Progress></Progress>
+          ) : (
+            <Button variant="contained" color="warning" type="submit">
+              Зарегестрироваться
+            </Button>
+          )}
         </ButtonLog>
       </FormTest>
     </>
