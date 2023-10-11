@@ -32,7 +32,6 @@ export const authApi = createApi({
           url: "addTest",
           method: "POST",
           body: { questions, icon, description, name },
-          credentials: "include",
         };
       },
     }),
