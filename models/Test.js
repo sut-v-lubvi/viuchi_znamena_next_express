@@ -22,5 +22,11 @@ const testSchema = new Schema({
   questions: [questionSchema],
 });
 
+testSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+testSchema.set("toJSON", {
+  virtuals: true,
+});
 const Test = model("Test", testSchema);
 module.exports = Test;
