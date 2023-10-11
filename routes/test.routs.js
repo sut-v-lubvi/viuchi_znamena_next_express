@@ -25,4 +25,24 @@ router.get("/getTests", async (req, res) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  const testId = req.id;
+
+  try {
+    const deletedUser = await Test.findByIdAndDelete(testId);
+
+    if (deletedUser) {
+      res
+        .status(200)
+        .json({ message: "Test deleted successfully", deletedUser });
+    } else {
+      res.status(404).json({ message: "Test not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error deleting test", error: error.message });
+  }
+});
+
 module.exports = router;

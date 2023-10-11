@@ -10,6 +10,12 @@ export const testApi = createApi({
         url: "getTests",
       }),
     }),
+    deleteTest: build.mutation<void, string>({
+      query: (testId) => ({
+        url: `delete/${testId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
-export const { useGetTestsQuery } = testApi;
+export const { useGetTestsQuery, useDeleteTestMutation } = testApi;

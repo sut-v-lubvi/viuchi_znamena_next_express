@@ -2,7 +2,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { BsCardChecklist } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
-import { Container } from "./style";
+import { Container, ContainerNaw } from "./style";
 import Link from "next/link";
 
 export default function SettingsLayout({
@@ -11,8 +11,8 @@ export default function SettingsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <Container>
+    <Container>
+      <ContainerNaw>
         <BottomNavigation showLabels>
           <BottomNavigationAction
             label="Добавить тест"
@@ -26,8 +26,8 @@ export default function SettingsLayout({
           />
           <BottomNavigationAction label="Пользователи" icon={<FiUsers />} />
         </BottomNavigation>
-      </Container>
+      </ContainerNaw>
       {children}
-    </div>
+    </Container>
   );
 }

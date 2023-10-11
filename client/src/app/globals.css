@@ -146,3 +146,6 @@ a {
   z-index: 2;
   gap: 20px;
 }
+.list_gap {
+  gap: 20px;
+}
