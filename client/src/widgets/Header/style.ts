@@ -35,6 +35,8 @@ export const Red = styled.span`
 `;
 
 export const FalseBlock = styled.div`
+  display: flex;
+  justify-content: center;
   width: 40px;
   height: 38px;
 `;

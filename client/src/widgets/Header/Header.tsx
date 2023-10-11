@@ -3,6 +3,7 @@ import { BurgerButton } from "@/shared/ui/BurgerButton";
 import NavMenu from "../NavMenu/NavMenu";
 import { useState } from "react";
 import { FalseBlock, HeaderContainer, HeaderTitle, Red, Title } from "./style";
+import LogoutButton from "@/features/logOutButton";
 
 export default function Header() {
   const [stateMenu, setStateMenu] = useState<boolean>(false);
@@ -17,7 +18,9 @@ export default function Header() {
             <Red>З</Red>намена
           </Title>
         </HeaderTitle>
-        <FalseBlock></FalseBlock>
+        <FalseBlock>
+          <LogoutButton />
+        </FalseBlock>
       </HeaderContainer>
       <NavMenu stateMenu={stateMenu} setStateMenu={setStateMenu} />
     </>

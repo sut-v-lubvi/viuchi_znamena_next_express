@@ -5,12 +5,14 @@ interface IUserState {
   email: string | null;
   token: string | null;
   id: string | null;
+  isAuthenticated: boolean | null;
 }
 
 const initialState: IUserState = {
   email: null,
   token: null,
   id: null,
+  isAuthenticated: null,
 };
 
 export const userSlice = createSlice({
@@ -27,9 +29,16 @@ export const userSlice = createSlice({
       state.token = null;
       state.id = null;
     },
+    setAuthenticated: (state, action: PayloadAction<boolean>) => {
+      debugger;
+      state.isAuthenticated = action.payload;
+    },
+    logout: (state) => {
+      state.isAuthenticated = false;
+    },
   },
 });
 
 export default userSlice.reducer;
 
-export const { removeUser, setUser } = userSlice.actions;
+export const actionsUser = userSlice.actions;

@@ -4,8 +4,28 @@ import { Title } from "@/widgets/Finish/style";
 import { Red } from "@/widgets/Header/style";
 import { Description } from "./style";
 import { useAuth } from "@/shared/hooks/useAuth";
+import { memo, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/hooks/hooks";
+import { redirect } from "next/navigation";
+import { useActions } from "@/redux/hooks/useActions";
 
-export default function Home() {
+export default memo(function Home() {
+  const { setAuthenticated } = useActions();
+  const { isAuthenticated } = useAppSelector((state) => state.user);
+  useEffect(() => {
+    debugger;
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
+    }
+  }, []);
+  console.log(isAuthenticated);
+  if (isAuthenticated === false) {
+    redirect("/auth/login");
+  }
   return (
     <>
       <Title>
@@ -17,4 +37,4 @@ export default function Home() {
       </Description>
     </>
   );
-}
+});

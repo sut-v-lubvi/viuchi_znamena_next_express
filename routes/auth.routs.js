@@ -24,7 +24,7 @@ router.post(
           message: "Некорректные данные при регистрации",
         });
       }
-      const { email, password } = req.body;
+      const { email, password, name } = req.body;
       const candidate = await User.findOne({ email });
       if (candidate) {
         return res
@@ -32,7 +32,7 @@ router.post(
           .json({ message: "Такой пользователь уже существует." });
       }
       const hashedPassword = await bcrypt.hash(password, 12);
-      const user = new User({ email, password: hashedPassword });
+      const user = new User({ email, password: hashedPassword, name });
       await user.save();
       res.status(201).json({ message: "Пользователь создан" });
     } catch (e) {

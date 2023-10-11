@@ -1,5 +1,4 @@
 "use client";
-import AuthForm from "@/widgets/AuthPage";
 
 type Inputs = {
   name: string;
@@ -8,9 +7,5 @@ type Inputs = {
 };
 
 export default function AuthPage() {
-  return (
-    <>
-      <AuthForm />
-    </>
-  );
+  return <></>;
 }

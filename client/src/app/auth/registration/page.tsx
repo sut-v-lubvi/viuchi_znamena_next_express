@@ -1,14 +1,17 @@
 "use client";
 import TextField from "@mui/material/TextField";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ButtonLog, Error, FormTest } from "./style";
 import { Button } from "@mui/material";
-import { HeaderTitle } from "../Header/style";
 import { useRegisterMutation, useIsLoginMutation } from "@/redux/api/authApi";
 import { error } from "console";
 import { useEffect, useState } from "react";
+import { useActions } from "@/redux/hooks/useActions";
+import { useRouter } from "next/navigation";
+import { HeaderTitle } from "@/widgets/Header/style";
+import { ButtonLog, Error, FormTest } from "../login/style";
 
-export type LoginInput = {
+export type RegisterInput = {
+  name: string;
   email: string;
   password: string;
 };
@@ -19,16 +22,14 @@ export default function AuthForm() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<LoginInput>();
+  } = useForm<RegisterInput>();
 
-  const [addRegister, { isError, error }] = useRegisterMutation<any>();
-  const [addLogin, { data, isSuccess }] = useIsLoginMutation();
-  const onSubmit: SubmitHandler<LoginInput> = (dataLog) => {
-    addLogin(dataLog).unwrap();
-  };
-  const onSubmitRegister: SubmitHandler<LoginInput> = async (dataReg) => {
+  const router = useRouter();
+  const [addRegister, { isError, error, isSuccess }] =
+    useRegisterMutation<any>();
+
+  const onSubmit: SubmitHandler<RegisterInput> = async (dataReg) => {
     addRegister(dataReg).unwrap();
   };
   useEffect(() => {
@@ -37,10 +38,20 @@ export default function AuthForm() {
       console.log(error.data.message);
     }
   }, [error]);
+  if (isSuccess) {
+    router.push("/auth/login");
+  }
   return (
     <>
-      <HeaderTitle>Войдите или зарегистрируйтесь</HeaderTitle>
+      <HeaderTitle>Зарегистрируйтесь</HeaderTitle>
       <FormTest component="form" onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          error={isError}
+          id="name"
+          label="name "
+          variant="outlined"
+          {...register("email", { required: "Поле обязательно к заполнению" })}
+        />
         <TextField
           error={isError}
           id="login"
@@ -67,14 +78,7 @@ export default function AuthForm() {
         )}
         {error && <Error>{errorMessage}</Error>}
         <ButtonLog>
-          <Button variant="contained" type="submit">
-            Войти
-          </Button>
-          <Button
-            variant="contained"
-            color="warning"
-            onClick={handleSubmit(onSubmitRegister)}
-          >
+          <Button variant="contained" color="warning" type="submit">
             Зарегестрироваться
           </Button>
         </ButtonLog>

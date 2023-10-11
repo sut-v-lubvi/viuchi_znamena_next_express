@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://test-crlu.onrender.com/api/:path*",
+        destination: "https://test-crlu.onrender.com/:path*",
       },
     ];
   },
