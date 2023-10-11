@@ -19,7 +19,7 @@ interface Props {
 
 export default function Test({ params: { testId } }: Props) {
   const router = useRouter();
-  const { data, error, isSuccess } = useGetTestsQuery("");
+  const { data, error, isSuccess } = useGetTestsQuery();
   const [currentTest, setCurrentTest] = useState<TestType | null>(null);
   const [questionTestId, setQuestionTestId] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>();
