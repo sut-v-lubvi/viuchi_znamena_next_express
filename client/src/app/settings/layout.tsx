@@ -3,7 +3,6 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { BsCardChecklist } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { Container, ContainerNaw } from "./style";
-import Link from "next/link";
 
 export default function SettingsLayout({
   children,
