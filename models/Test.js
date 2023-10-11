@@ -15,7 +15,6 @@ const questionSchema = new Schema({
 });
 
 const testSchema = new Schema({
-  id: Types.ObjectId,
   name: String,
   icon: String,
   description: String,
