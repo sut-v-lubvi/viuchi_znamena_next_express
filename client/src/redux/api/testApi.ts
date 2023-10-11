@@ -10,7 +10,7 @@ export const testApi = createApi({
         url: "getTests",
       }),
     }),
-    deleteTest: build.mutation<void, string>({
+    deleteTest: build.mutation<void, number | null>({
       query: (testId) => ({
         url: `delete/${testId}`,
         method: "DELETE",

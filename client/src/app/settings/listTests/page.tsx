@@ -33,7 +33,7 @@ export default function TestList() {
                 key={id}
                 secondaryAction={
                   <IconButton edge="end" aria-label="delete" color="error">
-                    <MdDeleteOutline onClick={deleteTest} />
+                    <MdDeleteOutline onClick={() => deleteTest(id)} />
                   </IconButton>
                 }
               >

@@ -27,6 +27,7 @@ router.get("/getTests", async (req, res) => {
 
 router.delete("/delete/:id", async (req, res) => {
   const testId = req.id;
+  console.log(testId);
 
   try {
     const deletedUser = await Test.findByIdAndDelete(testId);
