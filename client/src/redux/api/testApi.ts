@@ -5,7 +5,7 @@ export const testApi = createApi({
   reducerPath: "test",
   baseQuery: fetchBaseQuery({ baseUrl: "https://test-crlu.onrender.com/api" }),
   endpoints: (build) => ({
-    getTests: build.query({
+    getTests: build.query<TestType[], void>({
       query: () => ({
         url: "getTests",
       }),

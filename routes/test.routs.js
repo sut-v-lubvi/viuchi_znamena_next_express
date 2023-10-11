@@ -5,8 +5,8 @@ const Test = require("../models/Test");
 router.post("/addTest", async (req, res) => {
   try {
     console.log(req.body);
-    const { questions, icon, description, id, name } = req.body;
-    const test = new Test({ questions, icon, description, id, name });
+    const { questions, icon, description, name } = req.body;
+    const test = new Test({ questions, icon, description, name });
     await test.save();
     res.status(201).json({ message: "Тест доблавлен" });
   } catch (e) {

@@ -3,6 +3,8 @@ import { getTestList } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/fake
 import { useEffect, useState } from "react";
 import TestItem from "@/features/testItem";
 import { useGetTestsQuery } from "@/redux/api/testApi";
+import { useAppSelector } from "@/redux/hooks/hooks";
+import { redirect } from "next/navigation";
 
 export type TestListT = {
   name: string;
@@ -12,6 +14,8 @@ export type TestListT = {
 };
 
 export default function TestsList() {
+  const { isAuthenticated } = useAppSelector((state) => state.user);
+
   const { data, error } = useGetTestsQuery("");
   console.log(data);
   const [testsList, setTestList] = useState<TestListT[] | null>(null);
@@ -21,7 +25,9 @@ export default function TestsList() {
       setTestList(getTestList(data));
     }
   }, [data]);
-
+  if (!isAuthenticated) {
+    redirect("/auth/login");
+  }
   return (
     <>
       {testsList &&

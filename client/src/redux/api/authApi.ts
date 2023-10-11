@@ -26,13 +26,12 @@ export const authApi = createApi({
       }),
     }),
     addNewTest: build.mutation({
-      query({ questions, icon, description, id, name }) {
+      query({ questions, icon, description, name }) {
         debugger;
-        console.log({ questions, icon, description, id, name });
         return {
           url: "addTest",
           method: "POST",
-          body: { questions, icon, description, id, name },
+          body: { questions, icon, description, name },
           credentials: "include",
         };
       },

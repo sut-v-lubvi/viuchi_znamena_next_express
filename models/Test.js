@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
-const answerSchema = new mongoose.Schema({
+const answerSchema = new Schema({
   id: Number,
   label: String,
 });
 
-const questionSchema = new mongoose.Schema({
+const questionSchema = new Schema({
   id: Number,
   image: String,
   znamya: String,
@@ -14,19 +14,13 @@ const questionSchema = new mongoose.Schema({
   answers: [answerSchema],
 });
 
-const testSchema = new mongoose.Schema({
-  id: Number,
+const testSchema = new Schema({
+  id: Types.ObjectId,
   name: String,
   icon: String,
   description: String,
   questions: [questionSchema],
 });
 
-const testsSchema = new mongoose.Schema({
-  name: String,
-  tests: [testSchema],
-});
-
-const Tests = mongoose.model("Tests", testsSchema);
-const Test = mongoose.model("Test", testSchema);
+const Test = model("Test", testSchema);
 module.exports = Test;

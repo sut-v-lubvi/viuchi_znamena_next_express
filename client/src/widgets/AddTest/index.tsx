@@ -48,7 +48,6 @@ export default memo(function TestForm() {
       questions: questionsArray,
       icon: data.icon,
       description: data.description,
-      id: 0,
       name: data.name,
     });
     reset();

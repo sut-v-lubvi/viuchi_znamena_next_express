@@ -64,7 +64,7 @@ const dataLinks: LinksType[] = [
   },
   {
     id: 6,
-    href: "/addTest",
+    href: "/settings",
     icon: <Settings />,
     text: "Настройки",
   },
