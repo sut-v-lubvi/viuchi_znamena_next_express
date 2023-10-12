@@ -4,9 +4,13 @@ const config = require("config");
 const mongoose = require("mongoose");
 
 const app = express();
+
 app.use(
   cors({
-    origin: ["https://test-crlu.onrender.com/", "http://localhost:5000/"],
+    origin: "https://test-crlu.onrender.com/",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
   })
 );
 
