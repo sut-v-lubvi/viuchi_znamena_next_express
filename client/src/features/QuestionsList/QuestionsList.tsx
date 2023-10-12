@@ -1,8 +1,7 @@
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { useActions } from "@/redux/hooks/useActions";
-import { AnswerType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 import { Kruk } from "@/widgets/NavMenu/style";
-import { Container, FlexItem, FlexContainer } from "./QuestionsListStyle";
+import { Container, Text, FlexContainer } from "./QuestionsListStyle";
 import { Button } from "@mui/material";
 
 interface Props {
@@ -19,7 +18,7 @@ export const QuestionList = ({ reset }: Props) => {
         return (
           <FlexContainer key={question.id}>
             <Kruk dangerouslySetInnerHTML={{ __html: question.znamya }}></Kruk>
-            <div
+            <Text
               onClick={() =>
                 reset({
                   img: question.znamya,
@@ -33,7 +32,7 @@ export const QuestionList = ({ reset }: Props) => {
               }
             >
               {question.question}
-            </div>
+            </Text>
             <Button
               variant="outlined"
               color="error"
