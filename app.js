@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://test-crlu.onrender.com/",
+    origin: "https://test-crlu.onrender.com/api/",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     optionsSuccessStatus: 204,
