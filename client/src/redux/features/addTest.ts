@@ -1,9 +1,5 @@
 import { TestType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
-import { testScore } from "@/shared/utils/testScore";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { useAddNewTestMutation } from "../api/authApi";
-import { useDispatch } from "react-redux";
 
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",

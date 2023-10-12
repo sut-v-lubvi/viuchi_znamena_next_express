@@ -1,6 +1,5 @@
 import { testScore } from "@/shared/utils/testScore";
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface currentTestState {
   id?: number | null;
