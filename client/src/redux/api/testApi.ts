@@ -28,7 +28,6 @@ export const testApi = createApi({
     }),
     addNewTest: build.mutation({
       query({ questions, icon, description, name }) {
-        debugger;
         return {
           url: "addTest",
           method: "POST",

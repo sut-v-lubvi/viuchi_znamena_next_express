@@ -7,10 +7,10 @@ export const useTitle = (evaluation: number) => {
       setTitle("Попробуй ещё раз");
     }
     if (evaluation === 3) {
-      setTitle("Не плохо");
+      setTitle("Не плохо!");
     }
     if (evaluation === 4) {
-      setTitle("А ты хорош");
+      setTitle("А ты хорош!");
     }
     if (evaluation === 5) {
       setTitle("Аминь!");

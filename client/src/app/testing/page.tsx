@@ -28,7 +28,8 @@ export default function TestsList() {
       setTestList(getTestList(data));
     }
   }, [data]);
-  if (!isAuthenticated) {
+
+  if (!localStorage.getItem("token")) {
     redirect("/auth/login");
   }
   return (

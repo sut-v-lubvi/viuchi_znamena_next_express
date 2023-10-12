@@ -49,7 +49,6 @@ export default memo(function TestForm() {
       description: data.description,
       name: data.name,
     });
-    reset();
     deleteAllQuestions();
     setQuestionsArray([]);
   };
