@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(
   cors({
-    origin: "*",
+    origin: "https://test-crlu.onrender.com",
   })
 );
 app.use(express.json({ extend: true }));

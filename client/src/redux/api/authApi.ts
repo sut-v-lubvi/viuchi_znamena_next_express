@@ -25,20 +25,6 @@ export const authApi = createApi({
         body,
       }),
     }),
-    addNewTest: build.mutation({
-      query({ questions, icon, description, name }) {
-        debugger;
-        return {
-          url: "addTest",
-          method: "POST",
-          body: { questions, icon, description, name },
-        };
-      },
-    }),
   }),
 });
-export const {
-  useRegisterMutation,
-  useIsLoginMutation,
-  useAddNewTestMutation,
-} = authApi;
+export const { useRegisterMutation, useIsLoginMutation } = authApi;

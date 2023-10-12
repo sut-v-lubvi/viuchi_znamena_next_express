@@ -1,3 +1,5 @@
+import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
+
 export interface IUser {
   name: string;
   email: string;
@@ -11,4 +13,12 @@ export interface IUser {
 export interface IGenericResponse {
   status: string;
   message: string;
+}
+
+export interface ITest {
+  id: string;
+  name: string;
+  icon: string;
+  questions: QuestionType[];
+  description: string;
 }
