@@ -15,7 +15,7 @@ export default function SettingsPage() {
         }
       }
     }
-  }, []);
+  }, [window, localStorage]);
 
   return <Container></Container>;
 }
