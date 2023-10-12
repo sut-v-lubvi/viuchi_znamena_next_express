@@ -2,20 +2,12 @@
 
 import { useEffect } from "react";
 import { Container } from "./style";
+import Fake from "@/features/fake";
 
 export default function SettingsPage() {
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.localStorage) {
-      if (!localStorage.getItem("password")) {
-        const password: any = prompt("Введите пароль");
-        if (password === "yaplakal2000") {
-          localStorage.setItem("password", password);
-        } else {
-          location.reload();
-        }
-      }
-    }
-  }, [window, localStorage]);
-
-  return <Container></Container>;
+  return (
+    <Container>
+      <Fake />
+    </Container>
+  );
 }
