@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(
   cors({
-    origin: "https://test-crlu.onrender.com",
+    origin: ["https://test-crlu.onrender.com/", "http://localhost:5000/"],
   })
 );
+
 app.use(express.json({ extend: true }));
 
 app.use("/api/auth", require("./routes/auth.routs"));
