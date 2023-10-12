@@ -25,8 +25,8 @@ router.get("/getTests", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
-  const testId = req.id;
+router.delete("delete/:id", async (req, res) => {
+  const testId = req.params.id;
   console.log(testId);
 
   try {

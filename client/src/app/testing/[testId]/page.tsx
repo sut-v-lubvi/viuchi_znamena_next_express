@@ -10,6 +10,7 @@ import Questions from "@/widgets/Questions";
 import { useActions } from "@/redux/hooks/useActions";
 import { useRouter } from "next/navigation";
 import { useGetTestsQuery } from "@/redux/api/testApi";
+import { ITest } from "@/redux/api/types";
 
 interface Props {
   params: {
@@ -20,7 +21,7 @@ interface Props {
 export default function Test({ params: { testId } }: Props) {
   const router = useRouter();
   const { data, error, isSuccess } = useGetTestsQuery();
-  const [currentTest, setCurrentTest] = useState<TestType | null>(null);
+  const [currentTest, setCurrentTest] = useState<ITest | null>(null);
   const [questionTestId, setQuestionTestId] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>();
 

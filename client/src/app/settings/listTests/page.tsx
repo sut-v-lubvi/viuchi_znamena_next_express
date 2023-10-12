@@ -20,7 +20,6 @@ import { Body, Container } from "./style";
 export default function TestList() {
   const { data } = useGetTestsQuery();
   const [deleteTest, { isError, isSuccess, error }] = useDeleteTestMutation();
-
   console.log(data);
   return (
     <Container>
@@ -32,8 +31,13 @@ export default function TestList() {
                 className="list_gap"
                 key={id}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete" color="error">
-                    <MdDeleteOutline onClick={() => deleteTest(id)} />
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    color="error"
+                    onClick={() => deleteTest(id)}
+                  >
+                    <MdDeleteOutline />
                   </IconButton>
                 }
               >

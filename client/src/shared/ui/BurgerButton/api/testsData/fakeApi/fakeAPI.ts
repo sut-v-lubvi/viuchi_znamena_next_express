@@ -1,6 +1,8 @@
+import { ITest } from "@/redux/api/types";
 import { TestType, dataTests } from "./testsData";
+import { ITestWithoutQuestions } from "@/app/testing/page";
 
-export const getTestList = (data: TestType[]) => {
+export const getTestList = (data: any) => {
   console.log("getTestList");
   let testListArr = [];
   for (let i = 0; i < data.length; i++) {
@@ -14,7 +16,7 @@ export const getTestList = (data: TestType[]) => {
   return testListArr;
 };
 
-export const getCurrentTest = (data: TestType[], TestId: string) => {
+export const getCurrentTest = (data: ITest[], TestId: string) => {
   const test = data[Number(TestId)];
   return test;
 };
