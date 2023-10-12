@@ -7,7 +7,6 @@ import { Button } from "@mui/material";
 import { HeaderTitle } from "../Header/style";
 import { useActions } from "@/redux/hooks/useActions";
 import { QuestionList } from "@/features/QuestionsList/QuestionsList";
-import { useAppSelector } from "@/redux/hooks/hooks";
 import { memo, useState } from "react";
 import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 import CircularProgress from "@mui/material/CircularProgress";
