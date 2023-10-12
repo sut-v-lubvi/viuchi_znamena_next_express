@@ -19,9 +19,11 @@ export type DataTestType = {
 };
 export default memo(function UpdateTestForm({ testId }: Props) {
   const [questionsArray, setQuestionsArray] = useState<QuestionType[] | []>([]);
-  const { addTest, addQuestions, deleteAllQuestions } = useActions();
+  const { addQuestions, deleteAllQuestions, addQuestionsCurrentTest } =
+    useActions();
   const { data, isSuccess } = useGetCurrentTestQuery(testId);
   const [dataTest, setDataTest] = useState<DataTestType | null>(null);
+
   useEffect(() => {
     setDataTest({
       name: data?.name,
@@ -29,15 +31,13 @@ export default memo(function UpdateTestForm({ testId }: Props) {
       description: data?.description,
     });
     if (isSuccess) {
-      setQuestionsArray(data.questions);
+      addQuestionsCurrentTest(data.questions);
     }
   }, [data]);
   const [updateQuery, { isLoading, error, isError, status }] =
     useUpdateTestMutation();
-
-  console.log(status);
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    addTest(data);
+    // addTest(data);
     updateQuery({
       id: testId,
       questions: questionsArray,
@@ -48,7 +48,7 @@ export default memo(function UpdateTestForm({ testId }: Props) {
     deleteAllQuestions();
     setQuestionsArray([]);
   };
-
+  console.log(questionsArray);
   return (
     <>
       <AddTestForm

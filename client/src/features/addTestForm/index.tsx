@@ -6,7 +6,7 @@ import { AddQuestions } from "@/features/addQuestions";
 import { Button } from "@mui/material";
 import { useActions } from "@/redux/hooks/useActions";
 import { QuestionList } from "@/features/QuestionsList/QuestionsList";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Alert } from "@mui/material";
@@ -56,14 +56,13 @@ export default memo(function AddTestForm({
     formState: { errors },
   } = useForm<Inputs>();
   const [countQuestion, setCountQuestion] = useState(0);
-  if (dataTest) {
-    reset(dataTest);
-  }
-
-  console.log(status);
+  useEffect(() => {
+    if (dataTest) {
+      reset(dataTest);
+    }
+  }, [dataTest]);
 
   const onSubmitQuestions: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const questionsData = {
       id: countQuestion,
       image: "",
@@ -110,7 +109,7 @@ export default memo(function AddTestForm({
           handleSubmit={handleSubmit}
           onSubmitQuestions={onSubmitQuestions}
         />
-        <QuestionList />
+        <QuestionList reset={reset} />
         {isLoading ? (
           <CircularProgress></CircularProgress>
         ) : (

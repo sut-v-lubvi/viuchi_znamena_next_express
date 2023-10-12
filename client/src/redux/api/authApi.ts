@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IGenericResponse } from "./types";
-import { TestType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 import { RegisterInput } from "@/app/auth/registration/page";
 import { LoginInput } from "@/app/auth/login/page";
 

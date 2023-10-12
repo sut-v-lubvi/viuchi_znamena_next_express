@@ -51,6 +51,9 @@ export const addTestSlice = createSlice({
       state.numberQuestions = state.numberQuestions + 1;
       state.questions.push(newQuestions);
     },
+    addQuestionsCurrentTest: (state, { payload }) => {
+      state.questions = payload;
+    },
     deleteQuestions: (state, { payload }) => {
       state.deleteQuestionsArray.push(payload);
       let minimal = state.deleteQuestionsArray.sort();

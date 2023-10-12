@@ -60,16 +60,17 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 router.put("/update/:id", async (req, res) => {
+  console.log(req);
+  console.log(req.params);
   const { id } = req.params;
-  const { name, icon, description } = req.body;
+  const { name, icon, description, questions } = req.body;
 
   try {
     const updatedTest = await Test.findByIdAndUpdate(
       id,
       { questions, icon, description, name },
-      { new: true } // Чтобы получить обновленный объект после обновления
+      { new: true }
     );
-
     if (updatedTest) {
       res
         .status(200)

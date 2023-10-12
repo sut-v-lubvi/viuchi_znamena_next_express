@@ -25,7 +25,6 @@ export default memo(function TestForm() {
   const [addTestQuery, { isLoading, error, isError, status }] =
     useAddNewTestMutation<any>();
   const [questionsArray, setQuestionsArray] = useState<QuestionType[] | []>([]);
-  console.log(status);
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     addTest(data);
     addTestQuery({
