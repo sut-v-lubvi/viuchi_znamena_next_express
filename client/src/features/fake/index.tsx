@@ -1,8 +1,8 @@
 "use client";
 
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 
-export default memo(function Fake() {
+export default function Fake() {
   useEffect(() => {
     if (!localStorage.getItem("password")) {
       const password: any = prompt("Введите пароль");
@@ -14,4 +14,4 @@ export default memo(function Fake() {
     }
   }, []);
   return <></>;
-});
+}

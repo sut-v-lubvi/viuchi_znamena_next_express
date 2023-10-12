@@ -3,10 +3,8 @@ import { getTestList } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/fake
 import { useEffect, useState } from "react";
 import TestItem from "@/features/testItem";
 import { useGetTestsQuery } from "@/redux/api/testApi";
-import { useAppSelector } from "@/redux/hooks/hooks";
 import { redirect } from "next/navigation";
 import { ITest } from "@/redux/api/types";
-import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 
 export type TestListT = {
   name: string;
@@ -17,8 +15,6 @@ export type TestListT = {
 export type ITestWithoutQuestions = Omit<ITest, "questions">;
 
 export default function TestsList() {
-  const { isAuthenticated } = useAppSelector((state) => state.user);
-
   const { data, error } = useGetTestsQuery();
   console.log(data);
   const [testsList, setTestList] = useState<any | null>(null);
@@ -28,10 +24,12 @@ export default function TestsList() {
       setTestList(getTestList(data));
     }
   }, [data]);
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      redirect("/auth/login");
+    }
+  }, []);
 
-  if (!localStorage.getItem("token")) {
-    redirect("/auth/login");
-  }
   return (
     <>
       {testsList &&

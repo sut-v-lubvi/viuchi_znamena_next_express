@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Container } from "./style";
 import Fake from "@/features/fake";
 

@@ -11,11 +11,13 @@ import {
   createTheme,
 } from "@mui/material";
 import { MdDeleteOutline } from "react-icons/md";
+import { BiPencil } from "react-icons/bi";
 
 import React, { useEffect } from "react";
 import { Kruk } from "@/widgets/NavMenu/style";
 import { useDeleteTestMutation, useGetTestsQuery } from "@/redux/api/testApi";
-import { Body, Container } from "./style";
+import { Body, Container, ContainerButton, ListContainer, Text } from "./style";
+import Link from "next/link";
 
 export default function TestList() {
   const { data } = useGetTestsQuery();
@@ -23,37 +25,35 @@ export default function TestList() {
   console.log(data);
   return (
     <Container>
-      <Body>
-        {data && (
-          <List dense={true}>
-            {data.map(({ id, icon, name }) => (
-              <ListItem
-                className="list_gap"
-                key={id}
-                secondaryAction={
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    color="error"
-                    onClick={() => deleteTest(id)}
-                  >
-                    <MdDeleteOutline />
-                  </IconButton>
-                }
-              >
-                <ListItemAvatar>
-                  <Kruk
-                    dangerouslySetInnerHTML={{
-                      __html: icon,
-                    }}
-                  ></Kruk>
-                </ListItemAvatar>
-                <ListItemText primary={name} />
-              </ListItem>
-            ))}
-          </List>
-        )}
-      </Body>
+      {data &&
+        data.map(({ id, icon, name }) => (
+          <ListContainer>
+            <Kruk
+              dangerouslySetInnerHTML={{
+                __html: icon,
+              }}
+            ></Kruk>
+            <Text>{name}</Text>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              color="info"
+              onClick={() => deleteTest(id)}
+            >
+              <BiPencil>
+                <Link href={`/settings/${id}`}></Link>
+              </BiPencil>
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              color="error"
+              onClick={() => deleteTest(id)}
+            >
+              <MdDeleteOutline />
+            </IconButton>
+          </ListContainer>
+        ))}
     </Container>
   );
 }
