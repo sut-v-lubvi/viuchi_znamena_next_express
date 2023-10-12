@@ -19,6 +19,11 @@ export const testApi = createApi({
             ]
           : [{ type: "Test", id: "LIST" }],
     }),
+    getCurrentTest: build.query<ITest, string>({
+      query: (testId) => ({
+        url: `getTest/${testId}`,
+      }),
+    }),
     deleteTest: build.mutation<void, string>({
       query: (testId) => ({
         url: `delete/${testId}`,
@@ -28,7 +33,6 @@ export const testApi = createApi({
     }),
     addNewTest: build.mutation({
       query({ questions, icon, description, name }) {
-        debugger;
         return {
           url: "addTest",
           method: "POST",
@@ -37,10 +41,20 @@ export const testApi = createApi({
       },
       invalidatesTags: [{ type: "Test", id: "LIST" }],
     }),
+    updateTest: build.mutation({
+      query: ({ id, questions, icon, description, name }) => ({
+        url: `/update/${id}`,
+        method: "PUT",
+        body: { name, icon, description, questions },
+      }),
+      invalidatesTags: [{ type: "Test", id: "LIST" }],
+    }),
   }),
 });
 export const {
   useGetTestsQuery,
   useDeleteTestMutation,
   useAddNewTestMutation,
+  useUpdateTestMutation,
+  useGetCurrentTestQuery,
 } = testApi;

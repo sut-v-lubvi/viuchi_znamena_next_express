@@ -3,9 +3,7 @@
 import { Title } from "@/widgets/Finish/style";
 import { Red } from "@/widgets/Header/style";
 import { Description } from "./style";
-import { useAuth } from "@/shared/hooks/useAuth";
 import { memo, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/hooks/hooks";
 import { redirect } from "next/navigation";
 import { useActions } from "@/redux/hooks/useActions";

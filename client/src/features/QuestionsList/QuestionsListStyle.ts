@@ -16,3 +16,8 @@ export const FlexItem = styled.div`
   align-items: center;
   align-self: center;
 `;
+export const Text = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;

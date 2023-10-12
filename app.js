@@ -4,11 +4,14 @@ const config = require("config");
 const mongoose = require("mongoose");
 
 const app = express();
+
 app.use(
   cors({
-    origin: "https://test-crlu.onrender.com",
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
+
 app.use(express.json({ extend: true }));
 
 app.use("/api/auth", require("./routes/auth.routs"));
