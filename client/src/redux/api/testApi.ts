@@ -19,7 +19,7 @@ export const testApi = createApi({
             ]
           : [{ type: "Test", id: "LIST" }],
     }),
-    deleteTest: build.mutation<void, number | null>({
+    deleteTest: build.mutation<void, string>({
       query: (testId) => ({
         url: `delete/${testId}`,
         method: "DELETE",
