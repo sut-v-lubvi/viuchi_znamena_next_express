@@ -48,6 +48,10 @@ export default function Questions({
         </DivTitle>
         <Line></Line>
       </DivQuestions>
+      <div>
+        {(isAnswer && answerId === currentQuestion.correctAnswersIds[0]) && 'Верно!'}
+        {(isAnswer && answerId !== currentQuestion.correctAnswersIds[0]) && 'Неверно!'}
+        </div>
       <ContainerQ>
         {currentQuestion.answers.map((e) => {
           return (

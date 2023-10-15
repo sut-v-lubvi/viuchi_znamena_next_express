@@ -27,9 +27,7 @@ export const Links = styled(Link)`
 `;
 
 export const Container = styled.div`
-  border-radius: 20px;
   margin: 30px 15px 30px 15px;
-  border: solid 2px rgb(48, 48, 48);
   width: 100vw;
   max-height: 87vh;
   display: flex;

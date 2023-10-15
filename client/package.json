@@ -40,7 +40,8 @@
     "styled-components": "^6.0.7",
     "typescript": "5.2.2",
     "ui-kit-storybook": "^0.0.0",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "prettier": "3.0.3"
   },
   "devDependencies": {
     "@swc/plugin-styled-components": "^1.5.83",
