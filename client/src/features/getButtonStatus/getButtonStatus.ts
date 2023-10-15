@@ -4,8 +4,15 @@ export enum ButtonStatus {
   Wrong,
 }
 
-export const getButtonStatus = (answerId: number | null, correctAnswersId: number): ButtonStatus => {
-  if (answerId === null) return ButtonStatus.Pending
+interface GetButtonStatusParams {
+  isAnswer: boolean,
+  answerId: number,
+  correctAnswersId: number;
+}
+export const getButtonStatus = ({ isAnswer, answerId, correctAnswersId }: GetButtonStatusParams): ButtonStatus => {
+  if (!isAnswer) {
+    return ButtonStatus.Pending
+  }
 
   if (answerId === correctAnswersId) {
     return ButtonStatus.Success;

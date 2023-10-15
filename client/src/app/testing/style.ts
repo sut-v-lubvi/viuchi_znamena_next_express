@@ -40,7 +40,7 @@ export const Description = styled.div`
   align-items: center;
   align-self: center;
   font-size: 14;
-  width: 90%;
+  width: 100%;
   color: rgb(66, 65, 65);
 `;
 

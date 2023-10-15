@@ -33,7 +33,8 @@ export default memo(function UpdateTestForm({ testId }: Props) {
     if (isSuccess) {
       addQuestionsCurrentTest(data.questions);
     }
-  }, [data]);
+  }, [data, isSuccess, addQuestionsCurrentTest]);
+
   const [updateQuery, { isLoading, error, isError, status }] =
     useUpdateTestMutation();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -48,7 +49,6 @@ export default memo(function UpdateTestForm({ testId }: Props) {
     deleteAllQuestions();
     setQuestionsArray([]);
   };
-  console.log(questionsArray);
   return (
     <>
       <AddTestForm

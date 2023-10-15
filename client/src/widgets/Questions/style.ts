@@ -13,7 +13,7 @@ export const DivImg = styled.div`
   display: flex;
   justify-content: center;
   width: 300px;
-  height: 200px;
+  height: 180px;
   align-self: center;
 `;
 export const DivQuestions = styled.div`
@@ -27,7 +27,7 @@ export const DivTitle = styled.div`
   height: auto;
 `;
 export const ContainerQ = styled.div`
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -43,13 +43,12 @@ export const InputT = styled.input`
   height: 20px;
 `;
 export const Line = styled.div`
-  margin: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   height: 2px;
   background-color: rgb(128, 128, 128);
 `;
 export const None = styled.div`
-  width: 90%;
+  width: 100%;
   height: 40px;
   align-self: center;
 `;
@@ -59,13 +58,11 @@ export const ButtonNext = styled.button`
     box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s;
   }
-  font-size: 14px;
+  font-size: 16px;
   color: white;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
   background-color: rgb(48, 48, 48);
-  width: 90%;
-  height: 40px;
-  font-size: 15px;
+  width: 100%;
+  padding: 20px 10px;
   border-radius: 10px;
   align-self: center;
 `;

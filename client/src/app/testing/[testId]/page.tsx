@@ -46,6 +46,8 @@ export default function Test({ params: { testId } }: Props) {
       }
     }
   }, [questionTestId, currentTest]);
+
+
   if (currentTest && currentQuestion)
     return (
       <Questions
