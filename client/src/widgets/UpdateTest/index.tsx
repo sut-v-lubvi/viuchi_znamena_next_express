@@ -16,51 +16,38 @@ export type DataTestType = {
   name: string | undefined;
   icon: string | undefined;
   description: string | undefined;
+  questions?: QuestionType[]
 };
 export default memo(function UpdateTestForm({ testId }: Props) {
-  const [questionsArray, setQuestionsArray] = useState<QuestionType[] | []>([]);
-  const { addQuestions, deleteAllQuestions, addQuestionsCurrentTest } =
-    useActions();
   const { data, isSuccess } = useGetCurrentTestQuery(testId);
-  const [dataTest, setDataTest] = useState<DataTestType | null>(null);
-
-  useEffect(() => {
-    setDataTest({
-      name: data?.name,
-      icon: data?.icon,
-      description: data?.description,
-    });
-    if (isSuccess) {
-      addQuestionsCurrentTest(data.questions);
-    }
-  }, [data, isSuccess, addQuestionsCurrentTest]);
 
   const [updateQuery, { isLoading, error, isError, status }] =
     useUpdateTestMutation();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // addTest(data);
-    updateQuery({
+    const payload = {
       id: testId,
-      questions: questionsArray,
+      questions: data.questions.map(({ correctAnswer, ...item }) => ({
+        ...item,
+        correctAnswersIds: [Number(correctAnswer)]
+      })),
       icon: data.icon,
       description: data.description,
       name: data.name,
-    });
-    deleteAllQuestions();
-    setQuestionsArray([]);
+    }
+
+    console.log({ payload })
+
+    updateQuery(payload);
   };
+
   return (
-    <>
-      <AddTestForm
-        status={status}
-        isLoading={isLoading}
-        isError={isError}
-        submit={onSubmit}
-        setQuestionsArray={setQuestionsArray}
-        questionsArray={questionsArray}
-        textButton="Обновить тест"
-        dataTest={dataTest}
-      />
-    </>
+    <AddTestForm
+      status={status}
+      isLoading={isLoading}
+      isError={isError}
+      submit={onSubmit}
+      textButton="Обновить тест"
+      dataTest={data}
+    />
   );
 });

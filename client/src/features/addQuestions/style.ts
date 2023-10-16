@@ -6,6 +6,13 @@ export const FormQuestions = styled.div`
   display: grid;
   gap: 20px;
 `;
+
 export const ButtonQuestions = styled(Button)`
   margin-top: 20px;
+`;
+
+export const Preview = styled.span`
+    font-family: "znamenna";
+  font-size: 34px;
+
 `;

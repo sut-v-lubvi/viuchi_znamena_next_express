@@ -1,28 +1,27 @@
 "use client";
 import TextField from "@mui/material/TextField";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { FormTest } from "./style";
-import { AddQuestions } from "@/features/addQuestions";
 import { Button } from "@mui/material";
-import { useActions } from "@/redux/hooks/useActions";
-import { QuestionList } from "@/features/QuestionsList/QuestionsList";
-import { memo, useEffect, useState } from "react";
-import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
+import { memo, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Alert } from "@mui/material";
 import { HeaderTitle } from "@/widgets/Header/style";
 import { DataTestType } from "@/widgets/UpdateTest";
-export type Inputs = {
+import { QuestionFieldArray } from "./QuestionFieldArray";
+
+export type AddTestInputs = {
   name: string;
   icon: string;
   description: string;
-  img: string;
+  znamya: string;
   correctAnswer: number;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  questions: string;
+  questions: {
+    correctAnswer: number
+    question: string;
+    answers: { label: string, id: number }[];
+    znamya: string;
+  }[]
 };
 
 type Props = {
@@ -31,8 +30,6 @@ type Props = {
   isLoading: boolean;
   submit: any;
   textButton: string;
-  setQuestionsArray: any;
-  questionsArray: QuestionType[] | [];
   dataTest?: DataTestType | null;
 };
 
@@ -42,91 +39,72 @@ export default memo(function AddTestForm({
   isLoading,
   submit,
   textButton,
-  setQuestionsArray,
-  questionsArray,
   dataTest,
 }: Props) {
-  const { addQuestions } = useActions();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const [countQuestion, setCountQuestion] = useState(0);
+  const methods = useForm<AddTestInputs>();
+
   useEffect(() => {
-    if (dataTest) {
-      reset(dataTest);
+    if (!dataTest) {
+      return
     }
-  }, [dataTest]);
+    const initialData = {
+      ...dataTest,
+      questions: dataTest?.questions?.map(item => ({
+        ...item,
+        correctAnswer: item.correctAnswersIds[0],
+      }))
+    }
 
-  const onSubmitQuestions: SubmitHandler<Inputs> = (data) => {
-    const questionsData = {
-      id: countQuestion,
-      image: "",
-      znamya: data.img,
-      question: data.questions,
-      correctAnswersIds: [data.correctAnswer],
-      answers: [
-        { id: 1, label: data.option1 },
-        { id: 2, label: data.option2 },
-        { id: 3, label: data.option3 },
-        { id: 4, label: data.option4 },
-      ],
-    };
-
-    setQuestionsArray([...questionsArray, questionsData]);
-    setCountQuestion(countQuestion + 1);
-    addQuestions(data);
-  };
+    if (dataTest) {
+      methods.reset(initialData);
+    }
+  }, [dataTest, methods]);
 
   return (
     <>
-      <HeaderTitle>Добавте новый тест</HeaderTitle>
-      <FormTest component="form" onSubmit={handleSubmit(submit)}>
-        <TextField
-          id="outlined-basic"
-          label="Название"
-          variant="standard"
-          {...register("name", { required: true })}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Иконка"
-          variant="standard"
-          {...register("icon", { required: true })}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Описание"
-          variant="standard"
-          {...register("description", { required: true })}
-        />
-        <AddQuestions
-          register={register}
-          handleSubmit={handleSubmit}
-          onSubmitQuestions={onSubmitQuestions}
-        />
-        <QuestionList reset={reset} />
-        {isLoading ? (
-          <CircularProgress></CircularProgress>
-        ) : (
-          <Button type="submit" variant="contained">
-            {textButton}
-          </Button>
-        )}
-        {status === "uninitialized" ? (
-          <></>
-        ) : isError ? (
-          <Alert severity="error">
-            Что то пошло не так. Попробуйте ещё раз.
-          </Alert>
-        ) : (
-          <Alert severity="success">Тест успешно добавлен</Alert>
-        )}
-      </FormTest>
+      <HeaderTitle>Добавьте или обновите тест</HeaderTitle>
+      <FormProvider {...methods} >
+        <FormTest component="form" onSubmit={methods.handleSubmit(submit)}>
+          <TextField
+            id="outlined-basic"
+            label="Название"
+            variant="standard"
+            {...methods.register("name", { required: true })}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Иконка"
+            variant="standard"
+            {...methods.register("icon", { required: true })}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Описание"
+            variant="standard"
+            {...methods.register("description", { required: true })}
+          />
+
+          <QuestionFieldArray control={methods.control} register={methods.register} />
+
+          {isLoading ? (
+            <CircularProgress></CircularProgress>
+          ) : (
+            <Button type="submit" variant="contained">
+              {textButton}
+            </Button>
+          )}
+          {status === "uninitialized" ? (
+            <></>
+          ) : isError ? (
+            <Alert severity="error">
+              Что то пошло не так. Попробуйте ещё раз.
+            </Alert>
+          ) : (
+            <Alert severity="success">Тест успешно добавлен</Alert>
+          )}
+        </FormTest>
+      </FormProvider>
     </>
   );
 });

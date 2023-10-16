@@ -44,7 +44,7 @@ export default function Questions({
 
   return (
     <>
-      <Counter ref={timeRef} />
+      <Counter mRef={timeRef} />
       <DivQuestions>
         <DivImg>
           <Znamya
