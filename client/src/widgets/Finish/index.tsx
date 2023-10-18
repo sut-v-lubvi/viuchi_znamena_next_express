@@ -32,7 +32,6 @@ export default memo(function Finish({
   const { nullCorrectAnswers } = useActions();
   const title = useTitle(evaluation);
   useBass(evaluation, bass);
-  console.log(time);
   return (
     <>
       <Title>{title}</Title>
@@ -51,7 +50,7 @@ export default memo(function Finish({
         <Response $fg={false}>Ошибок: {errors}</Response>
       </FinishBody>
       <NavLine>
-        <NavIcons nullCorrectAnswers={nullCorrectAnswers} id={Number(id)} />
+        <NavIcons nullCorrectAnswers={nullCorrectAnswers} id={String(id)} />
       </NavLine>
     </>
   );

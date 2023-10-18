@@ -8,11 +8,12 @@ export const getTestList = (data: any) => {
   for (let i = 0; i < data.length; i++) {
     testListArr.push({
       name: data[i].name,
-      id: i,
+      id: data[i].id,
       icon: data[i].icon,
       description: data[i].description,
     });
   }
+  console.log(testListArr);
   return testListArr;
 };
 

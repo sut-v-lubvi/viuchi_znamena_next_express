@@ -1,3 +1,4 @@
+import { StatisticsType } from "@/app/profile/page";
 import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
 
 export interface IUser {
@@ -21,4 +22,11 @@ export interface ITest {
   icon: string;
   questions: QuestionType[];
   description: string;
+}
+export interface IUsers {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  statistics: StatisticsType[];
 }

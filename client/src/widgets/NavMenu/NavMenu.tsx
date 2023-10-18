@@ -13,7 +13,7 @@ import {
   Prof,
   Settings,
 } from "./style";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
   stateMenu: boolean;
@@ -25,51 +25,60 @@ type LinksType = {
   icon: ReactNode;
   text: string;
 };
-const dataLinks: LinksType[] = [
-  {
-    id: 1,
-    href: "/testing",
-    icon: (
-      <Kruk
-        dangerouslySetInnerHTML={{
-          __html: '<span class="red">â</span>[5',
-        }}
-      ></Kruk>
-    ),
-    text: "Выучи знамёна",
-  },
-  {
-    id: 2,
-    href: "/profile",
-    icon: <Prof />,
-    text: " Мой профиль",
-  },
-  {
-    id: 3,
-    href: "/rating",
-    icon: <KingIc />,
-    text: "Рейтинг",
-  },
-  {
-    id: 4,
-    href: "/documentation",
-    icon: <Doc />,
-    text: "Доукументация",
-  },
-  {
-    id: 5,
-    href: "/help",
-    icon: <Help />,
-    text: "Поддержка",
-  },
-  {
-    id: 6,
-    href: "/settings",
-    icon: <Settings />,
-    text: "Настройки",
-  },
-];
+
 export default function NavMenu({ stateMenu, setStateMenu }: Props) {
+  const [userId, setUserId] = useState<string>("");
+
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    if (id) {
+      setUserId(id);
+    }
+  }, []);
+  const dataLinks: LinksType[] = [
+    {
+      id: 1,
+      href: "/testing",
+      icon: (
+        <Kruk
+          dangerouslySetInnerHTML={{
+            __html: '<span class="red">â</span>[5',
+          }}
+        ></Kruk>
+      ),
+      text: "Выучи знамёна",
+    },
+    {
+      id: 2,
+      href: `/profile/${userId}`,
+      icon: <Prof />,
+      text: " Мой профиль",
+    },
+    {
+      id: 3,
+      href: "/rating",
+      icon: <KingIc />,
+      text: "Рейтинг",
+    },
+    {
+      id: 4,
+      href: "/documentation",
+      icon: <Doc />,
+      text: "Доукументация",
+    },
+    {
+      id: 5,
+      href: "/help",
+      icon: <Help />,
+      text: "Поддержка",
+    },
+    {
+      id: 6,
+      href: "/settings",
+      icon: <Settings />,
+      text: "Настройки",
+    },
+  ];
   return (
     <Menu $stateMenu={stateMenu}>
       <Container>

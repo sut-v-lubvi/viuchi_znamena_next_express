@@ -1,0 +1,42 @@
+"use client";
+
+import { useGetTestStatisticsQuery } from "@/redux/api/userApi";
+import { Container, Item, Result, Title } from "./style";
+import { Alert, Button } from "@mui/material";
+import { Line } from "@/app/testing/style";
+
+type Inputs = {
+  img: string;
+  questions: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  correctAnswer: number;
+};
+
+export const UserStatistics = ({ userId }: any) => {
+  const { data } = useGetTestStatisticsQuery(userId);
+  console.log(data);
+  return (
+    <>
+      {data && (
+        <Container>
+          {data.map((e) => (
+            <Item key={e.testId}>
+              <Title>{e.name}</Title>
+              <Result>
+                <Alert severity="success">{e.correctAnswers}</Alert>
+                <Alert severity="error">{e.errorAnswers}</Alert>
+              </Result>
+              <Button href={`/testing/${e.testId}`} variant="outlined">
+                Пройти ещё раз
+              </Button>
+              <Line></Line>
+            </Item>
+          ))}
+        </Container>
+      )}
+    </>
+  );
+};
