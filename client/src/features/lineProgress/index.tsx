@@ -14,7 +14,7 @@ export const LineProgress = ({ numberQuestions, questionTestId }: Props) => {
     if (questionTestId !== 0) {
       setProgress(progress + 100 / numberQuestions);
     }
-  }, [questionTestId]);
+  }, [questionTestId, progress, numberQuestions]);
   return (
     <Container>
       <LinearProgress

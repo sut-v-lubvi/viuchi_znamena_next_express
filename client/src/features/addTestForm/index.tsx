@@ -60,7 +60,7 @@ export default memo(function AddTestForm({
     if (dataTest) {
       reset(dataTest);
     }
-  }, [dataTest]);
+  }, [dataTest, reset]);
 
   const onSubmitQuestions: SubmitHandler<Inputs> = (data) => {
     const questionsData = {

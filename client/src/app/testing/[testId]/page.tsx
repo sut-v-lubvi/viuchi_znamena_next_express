@@ -61,11 +61,11 @@ export default function Test({ params: { testId } }: Props) {
   }, [
     questionTestId,
     currentTest,
-    useAppSelector,
     addTestResult,
     addStatistics,
     correctAnswers,
     router,
+    testId,
   ]);
   if (currentTest && currentQuestion)
     return (

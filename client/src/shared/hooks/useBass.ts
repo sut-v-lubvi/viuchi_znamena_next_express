@@ -10,5 +10,5 @@ export const useBass = (evaluation: number, bass: any) => {
         audioBass.pause();
       };
     }
-  }, [evaluation]);
+  }, [evaluation, bass]);
 };
