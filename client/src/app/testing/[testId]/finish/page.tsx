@@ -5,6 +5,7 @@ import Finish from "@/widgets/Finish";
 export default function FinishContainer() {
   const { id, name, correctAnswers, errors, lengthTest, evaluation, time } =
     useAppSelector((state) => state.testSlice);
+  console.log(id);
 
   return (
     <Finish

@@ -4,7 +4,7 @@ import React from "react";
 
 type Props = {
   nullCorrectAnswers: () => void;
-  id: number;
+  id: string;
 };
 
 export default function NavIcons({ nullCorrectAnswers, id }: Props) {

@@ -23,7 +23,11 @@ export default function SettingsLayout({
             icon={<BsCardChecklist />}
             href="/settings/listTests"
           />
-          <BottomNavigationAction label="Пользователи" icon={<FiUsers />} />
+          <BottomNavigationAction
+            label="Пользователи"
+            href="/settings/usersList"
+            icon={<FiUsers />}
+          />
         </BottomNavigation>
       </ContainerNaw>
       {children}

@@ -32,6 +32,7 @@ export default function AuthForm() {
       const response: any = await addLogin(dataLog).unwrap();
       console.log(response.token);
       localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", response.userId);
       console.log("Login successful");
       setAuthenticated(true);
       router.push("/");

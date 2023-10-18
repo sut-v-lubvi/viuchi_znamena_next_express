@@ -2,7 +2,7 @@ import { testScore } from "@/shared/utils/testScore";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface currentTestState {
-  id?: number | null;
+  id: number;
   name: string | null;
   lengthTest: number;
   correctAnswers: number;
@@ -12,7 +12,7 @@ export interface currentTestState {
 }
 
 const initialState: currentTestState = {
-  id: null,
+  id: 0,
   name: "",
   lengthTest: 0,
   correctAnswers: 0,
@@ -21,12 +21,12 @@ const initialState: currentTestState = {
   time: 0,
 };
 
-export const testSlice = createSlice({
-  name: "test",
+export const currentTestSlice = createSlice({
+  name: "currentTest",
   initialState,
   reducers: {
     addTestResult: (state, { payload }) => {
-      (state.id = Number(payload.id)),
+      (state.id = payload.id),
         (state.name = payload.name),
         (state.lengthTest = payload.lengthTest),
         (state.errors = payload.lengthTest - state.correctAnswers);
@@ -46,4 +46,4 @@ export const testSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const actionsTest = testSlice.actions;
+export const actionsTest = currentTestSlice.actions;

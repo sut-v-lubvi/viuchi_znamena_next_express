@@ -9,8 +9,10 @@ import {
 import Questions from "@/widgets/Questions";
 import { useActions } from "@/redux/hooks/useActions";
 import { useRouter } from "next/navigation";
-import { useGetTestsQuery } from "@/redux/api/testApi";
+import { useGetCurrentTestQuery, useGetTestsQuery } from "@/redux/api/testApi";
 import { ITest } from "@/redux/api/types";
+import { useAddTestStatisticsMutation } from "@/redux/api/userApi";
+import { useAppSelector } from "@/redux/hooks/hooks";
 
 interface Props {
   params: {
@@ -20,14 +22,18 @@ interface Props {
 
 export default function Test({ params: { testId } }: Props) {
   const router = useRouter();
-  const { data, error, isSuccess } = useGetTestsQuery();
+  const { data, isSuccess } = useGetCurrentTestQuery(testId);
   const [currentTest, setCurrentTest] = useState<ITest | null>(null);
   const [questionTestId, setQuestionTestId] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>();
-
+  const [addStatistics, {}] = useAddTestStatisticsMutation();
+  const { correctAnswers, lengthTest } = useAppSelector(
+    (state) => state.testSlice
+  );
   useEffect(() => {
     if (data) {
-      setCurrentTest(getCurrentTest(data, testId));
+      setCurrentTest(data);
+      console.log(data);
     }
   }, [data, testId]);
 
@@ -40,12 +46,19 @@ export default function Test({ params: { testId } }: Props) {
           name: currentTest.name,
           lengthTest: currentTest.questions.length,
         });
+        addStatistics({
+          userId: localStorage.getItem("userId"),
+          testId,
+          name: currentTest.name,
+          correctAnswers: correctAnswers,
+          totalQuestions: currentTest.questions.length,
+        });
         router.push("/testing/[testId]/finish");
       } else {
         setCurrentQuestion(currentTest.questions[questionTestId]);
       }
     }
-  }, [questionTestId, currentTest]);
+  }, [questionTestId, currentTest, useAppSelector]);
   if (currentTest && currentQuestion)
     return (
       <Questions
