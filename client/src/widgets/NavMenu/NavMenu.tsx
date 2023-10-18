@@ -76,7 +76,7 @@ export default function NavMenu({ stateMenu, setStateMenu }: Props) {
         text: "Настройки",
       },
     ]);
-  }, [userId, useAuth]);
+  }, [userId]);
 
   return (
     <Menu $stateMenu={stateMenu}>
