@@ -5,16 +5,6 @@ import { Container, Item, Result, Title } from "./style";
 import { Alert, Button } from "@mui/material";
 import { Line } from "@/app/testing/style";
 
-type Inputs = {
-  img: string;
-  questions: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  correctAnswer: number;
-};
-
 export const UserStatistics = ({ userId }: any) => {
   const { data } = useGetTestStatisticsQuery(userId);
   console.log(data);

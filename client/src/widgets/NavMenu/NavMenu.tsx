@@ -14,6 +14,7 @@ import {
   Settings,
 } from "./style";
 import { ReactNode, useEffect, useState } from "react";
+import { useAuth } from "@/shared/hooks/useAuth";
 
 interface Props {
   stateMenu: boolean;
@@ -27,14 +28,7 @@ type LinksType = {
 };
 
 export default function NavMenu({ stateMenu, setStateMenu }: Props) {
-  const [userId, setUserId] = useState<string>("");
-
-  useEffect(() => {
-    const id = localStorage.getItem("userId");
-    if (id) {
-      setUserId(id);
-    }
-  }, []);
+  const { token, userId } = useAuth();
   const dataLinks: LinksType[] = [
     {
       id: 1,
