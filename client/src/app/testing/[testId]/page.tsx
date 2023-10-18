@@ -58,7 +58,15 @@ export default function Test({ params: { testId } }: Props) {
         setCurrentQuestion(currentTest.questions[questionTestId]);
       }
     }
-  }, [questionTestId, currentTest, useAppSelector]);
+  }, [
+    questionTestId,
+    currentTest,
+    useAppSelector,
+    addTestResult,
+    addStatistics,
+    correctAnswers,
+    router,
+  ]);
   if (currentTest && currentQuestion)
     return (
       <Questions

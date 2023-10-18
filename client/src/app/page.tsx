@@ -18,7 +18,7 @@ export default memo(function Home() {
     } else {
       setAuthenticated(false);
     }
-  }, []);
+  }, [setAuthenticated]);
   console.log(isAuthenticated);
 
   if (isAuthenticated === false) {
