@@ -14,7 +14,7 @@ export const useAuth = () => {
     if (token) {
       setToken(token);
     }
-  }, [localStorage]);
+  }, []);
   console.log(userId);
   return { userId, token };
 };
