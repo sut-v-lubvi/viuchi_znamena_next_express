@@ -1,7 +1,6 @@
 "use client";
 
 import { UserStatistics } from "@/features/userStatistics";
-import { useGetTestStatisticsQuery } from "@/redux/api/userApi";
 import { useEffect, useState } from "react";
 
 export type StatisticsType = {
