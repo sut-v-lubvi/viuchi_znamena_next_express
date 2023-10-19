@@ -29,4 +29,16 @@ export interface IUsers {
   email: string;
   password: string;
   statistics: StatisticsType[];
+  avatar: AvatarType;
 }
+
+export interface IAvatar {
+  userId: string;
+  formData: FormData;
+}
+
+type AvatarType = {
+  filename: string;
+  originalname: string;
+  path: string;
+};

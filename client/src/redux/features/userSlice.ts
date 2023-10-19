@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IUserState {
   email: string | null;
   token: string | null;
-  id: string | null;
+  id: any;
   isAuthenticated: boolean | null;
 }
 
@@ -19,9 +19,8 @@ export const userSlice = createSlice({
   name: "userSlice",
   reducers: {
     setUser: (state, action) => {
-      state.email = action.payload.email;
       state.token = action.payload.token;
-      state.id = action.payload.id;
+      state.id = action.payload.userId;
     },
     removeUser: (state, action) => {
       state.email = null;

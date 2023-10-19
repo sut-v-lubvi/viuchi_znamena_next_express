@@ -1,7 +1,6 @@
 "use client";
 
 import { UserStatistics } from "@/features/userStatistics";
-import { useEffect, useState } from "react";
 
 interface Props {
   params: {
@@ -10,9 +9,6 @@ interface Props {
 }
 
 export default function UserProfile({ params: { userId } }: Props) {
-  return (
-    <>
-      <UserStatistics userId={userId} />
-    </>
-  );
+  console.log(userId);
+  return <UserStatistics userId={userId} />;
 }
