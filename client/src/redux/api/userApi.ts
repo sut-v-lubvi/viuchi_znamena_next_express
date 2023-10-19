@@ -27,10 +27,25 @@ export const userApi = createApi({
         method: "GET",
       }),
     }),
+    getUser: build.query<IUsers, string>({
+      query: (userId) => ({
+        url: `/getUser/${userId}`,
+        method: "GET",
+      }),
+    }),
+    uploadAvatar: build.mutation<{}, { userId: string; avatar: FormData }>({
+      query: ({ userId, avatar }) => ({
+        url: "/upload",
+        method: "POST",
+        body: { userId, avatar },
+      }),
+    }),
   }),
 });
 export const {
   useAddTestStatisticsMutation,
   useGetTestStatisticsQuery,
   useGetUsersQuery,
+  useGetUserQuery,
+  useUploadAvatarMutation,
 } = userApi;

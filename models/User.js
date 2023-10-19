@@ -1,9 +1,16 @@
 const { Schema, model, Types } = require("mongoose");
 
+const AvatarSchema = new Schema({
+  filename: { type: String, required: true },
+  originalname: { type: String, required: true },
+  path: { type: String, required: true },
+});
+
 const schema = new Schema({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  avatar: { type: AvatarSchema, default: null },
   statistics: [
     {
       testId: { type: String, required: true },

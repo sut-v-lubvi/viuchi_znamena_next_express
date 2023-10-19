@@ -9,17 +9,20 @@ import { redirect } from "next/navigation";
 import { useActions } from "@/redux/hooks/useActions";
 
 export default memo(function Home() {
-  const { setAuthenticated } = useActions();
-  const { isAuthenticated } = useAppSelector((state) => state.user);
+  const { setAuthenticated, setUser } = useActions();
+  const { isAuthenticated, id, token } = useAppSelector((state) => state.user);
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
     if (token) {
       setAuthenticated(true);
+      setUser({ token, userId });
     } else {
       setAuthenticated(false);
     }
   }, [setAuthenticated]);
-  console.log(isAuthenticated);
+  console.log(id);
+  console.log(token);
 
   if (isAuthenticated === false) {
     redirect("/auth/login");

@@ -1,11 +1,23 @@
+"use client";
 import styled from "styled-components";
 import { BiSolidBookOpen } from "react-icons/bi";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+`;
+export const ContainerInfo = styled.div`
+  display: flex;
+  gap: 15px;
+`;
 export const Title = styled.div`
-  font-size: 14px;
-  text-align: start;
-  padding: 0px 20px 0px 30px;
-  line-height: 1.3;
-  text-align: center;
-  color: rgb(66, 65, 65);
+  font-size: 18px;
+  padding-top: 10px;
+`;
+export const Correct = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  width: 100%;
 `;
