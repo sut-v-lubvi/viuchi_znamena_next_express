@@ -14,7 +14,7 @@ import { useRef, useState } from "react";
 import { AnswerOption } from "@/features/answerOptions";
 import { useActions } from "@/redux/hooks/useActions";
 import { Counter } from "@/features/counter";
-import { LineProgress } from "@/features/lineProgress";
+import LineProgress from "@/features/lineProgress";
 import { AnswerMessage } from "../AnswerMessage";
 interface Props {
   currentQuestion: QuestionType;

@@ -8,24 +8,25 @@ type Props = {
   numberQuestions: number;
 };
 
-export const LineProgress = memo(
-  ({ numberQuestions, questionTestId }: Props) => {
-    const [progress, setProgress] = useState(0);
-    const ref = useRef(0);
-    useEffect(() => {
-      if (questionTestId !== 0) {
-        setProgress(ref.current + 100 / numberQuestions);
-        ref.current = ref.current + 100 / numberQuestions;
-      }
-    }, [questionTestId, numberQuestions]);
-    return (
-      <Container>
-        <LinearProgress
-          color="inherit"
-          variant="determinate"
-          value={progress}
-        ></LinearProgress>
-      </Container>
-    );
-  }
-);
+export default memo(function LineProgress({
+  numberQuestions,
+  questionTestId,
+}: Props) {
+  const [progress, setProgress] = useState(0);
+  const ref = useRef(0);
+  useEffect(() => {
+    if (questionTestId !== 0) {
+      setProgress(ref.current + 100 / numberQuestions);
+      ref.current = ref.current + 100 / numberQuestions;
+    }
+  }, [questionTestId, numberQuestions]);
+  return (
+    <Container>
+      <LinearProgress
+        color="inherit"
+        variant="determinate"
+        value={progress}
+      ></LinearProgress>
+    </Container>
+  );
+});
