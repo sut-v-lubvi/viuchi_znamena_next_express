@@ -1,14 +1,25 @@
-// interface Arguments{
-//     answerId:number
-//     correctAnswersId:number
-//     addCorrectAnswers:()=>void
-// }
+export enum ButtonStatus {
+  Pending,
+  Success,
+  Wrong,
+}
 
-export const getButtonStatus = (answerId:number | null, correctAnswersId:number,) => {
-    if(answerId===null) return 'black'
-    if (answerId === correctAnswersId) {
+interface GetButtonStatusParams {
+  isAnswer: boolean;
+  answerId: number;
+  correctAnswersId: number;
+}
+export const getButtonStatus = ({
+  isAnswer,
+  answerId,
+  correctAnswersId,
+}: GetButtonStatusParams): ButtonStatus => {
+  if (!isAnswer) {
+    return ButtonStatus.Pending;
+  }
 
-      return "green";
-    }
-    return "red";
-  };
+  if (answerId === correctAnswersId) {
+    return ButtonStatus.Success;
+  }
+  return ButtonStatus.Wrong;
+};
