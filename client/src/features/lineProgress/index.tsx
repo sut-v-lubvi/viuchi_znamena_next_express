@@ -1,5 +1,5 @@
 import { type } from "os";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import LinearProgress from "../../../node_modules/@mui/material/LinearProgress/LinearProgress";
 import Stack from "@mui/material/Stack";
 import { Container } from "./style";
@@ -11,9 +11,11 @@ type Props = {
 export const LineProgress = memo(
   ({ numberQuestions, questionTestId }: Props) => {
     const [progress, setProgress] = useState(0);
+    const ref = useRef(0);
     useEffect(() => {
       if (questionTestId !== 0) {
-        setProgress(progress + 100 / numberQuestions);
+        setProgress(ref.current + 100 / numberQuestions);
+        ref.current = ref.current + 100 / numberQuestions;
       }
     }, [questionTestId, numberQuestions]);
     return (
