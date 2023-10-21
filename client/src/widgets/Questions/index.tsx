@@ -10,12 +10,12 @@ import {
   Znamya,
 } from "./style";
 import { QuestionType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsData";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnswerOption } from "@/features/answerOptions";
 import { useActions } from "@/redux/hooks/useActions";
 import { Counter } from "@/features/counter";
-import { useCounter } from "@/shared/hooks/useCounter";
-import { LineProgress } from "@/features/lineProgress";
+import LineProgress from "@/features/lineProgress";
+import { AnswerMessage } from "../AnswerMessage";
 interface Props {
   currentQuestion: QuestionType;
   numberQuestions: number;
@@ -32,11 +32,19 @@ export default function Questions({
   const [answerId, setAnswerId] = useState<number | null>(null);
   const isAnswer = typeof answerId === "number";
   const { addCorrectAnswers, addTestTime } = useActions();
+  const correctAnswerId = currentQuestion.correctAnswersIds[0];
+  const timeRef = useRef<number>(0);
 
-  let time: number = useCounter();
+  const onAnswer = (answerId: number) => () => {
+    if (answerId === correctAnswerId) {
+      addCorrectAnswers();
+    }
+    setAnswerId(answerId);
+  };
+
   return (
     <>
-      <Counter time={time} />
+      <Counter mRef={timeRef} />
       <DivQuestions>
         <DivImg>
           <Znamya
@@ -48,16 +56,19 @@ export default function Questions({
         </DivTitle>
         <Line></Line>
       </DivQuestions>
+      <AnswerMessage
+        isAnswer={isAnswer}
+        isCorrectAnswer={correctAnswerId === answerId}
+      />
       <ContainerQ>
         {currentQuestion.answers.map((e) => {
           return (
             <AnswerOption
               key={e.id}
               answer={e}
-              addCorrectAnswers={addCorrectAnswers}
+              onAnswer={onAnswer}
               isAnswer={isAnswer}
-              correctAnswersId={currentQuestion.correctAnswersIds[0]}
-              setAnswerId={setAnswerId}
+              correctAnswersId={correctAnswerId}
             />
           );
         })}
@@ -65,7 +76,7 @@ export default function Questions({
       {isAnswer ? (
         <ButtonNext
           onClick={() => {
-            addTestTime(time);
+            addTestTime(timeRef.current);
             setQuestionTestId(questionTestId + 1);
             setAnswerId(null);
           }}
