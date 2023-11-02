@@ -12,7 +12,7 @@ import { useGetUsersQuery } from "@/redux/api/userApi";
 import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
 
-export default function UsersList() {
+export default function Rating() {
   const { data } = useGetUsersQuery();
   console.log(data);
   return (
@@ -20,15 +20,15 @@ export default function UsersList() {
       {data && (
         <Container>
           <List>
-            {data.map((e) => (
-              <ListItem key={e.id}>
+            {data.data.users.map((e) => (
+              <ListItem key={e._id}>
                 <ListItemAvatar>
                   <Avatar>
                     <CgProfile />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText>
-                  <Link href={`/profile/${e.id}`}>{e.email}</Link>
+                  <Link href={`/profile/${e._id}`}>{e.email}</Link>
                 </ListItemText>
               </ListItem>
             ))}

@@ -5,11 +5,11 @@ import { LoginInput } from "@/app/auth/login/page";
 
 export const authApi = createApi({
   reducerPath: "auth",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://test-crlu.onrender.com/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/api/auth" }),
   endpoints: (build) => ({
     register: build.mutation<IGenericResponse, RegisterInput>({
       query: (body) => ({
-        url: "auth/register",
+        url: "/signup",
         method: "POST",
         body,
       }),
@@ -19,7 +19,7 @@ export const authApi = createApi({
       LoginInput
     >({
       query: (body) => ({
-        url: "auth/login",
+        url: "/signin",
         method: "POST",
         body,
       }),

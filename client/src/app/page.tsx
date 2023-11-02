@@ -11,6 +11,8 @@ import { useActions } from "@/redux/hooks/useActions";
 export default memo(function Home() {
   const { setAuthenticated, setUser } = useActions();
   const { isAuthenticated, id, token } = useAppSelector((state) => state.user);
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");

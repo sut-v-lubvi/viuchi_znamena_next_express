@@ -8,7 +8,7 @@ export const getTestList = (data: any) => {
   for (let i = 0; i < data.length; i++) {
     testListArr.push({
       name: data[i].name,
-      id: data[i].id,
+      id: data[i]._id,
       icon: data[i].icon,
       description: data[i].description,
     });

@@ -19,7 +19,7 @@ export default function Profile() {
       setUserId(id);
     }
   }, []);
-
+  console.log({ userId })
   return (
     <>
       <UserStatistics userId={userId} />

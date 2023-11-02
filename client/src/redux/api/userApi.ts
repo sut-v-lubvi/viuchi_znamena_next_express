@@ -2,34 +2,51 @@ import { StatisticsType } from "@/app/profile/page";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUsers } from "./types";
 
+interface GetTestStatistics {
+  data: {
+    stat: StatisticsType[]
+  }
+}
+interface GetUsers {
+  data: {
+    users: IUsers[]
+  }
+}
+
+interface GetOneUser {
+  data: {
+    user: IUsers
+  }
+}
+
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://test-crlu.onrender.com/api/user",
+    baseUrl: "/api/user",
   }),
   endpoints: (build) => ({
     addTestStatistics: build.mutation({
       query: ({ userId, testId, name, correctAnswers, totalQuestions }) => ({
-        url: `/add-statistics/${userId}`,
+        url: `/add-stat?id=${userId}`,
         method: "PUT",
         body: { testId, name, correctAnswers, totalQuestions },
       }),
     }),
-    getTestStatistics: build.query<StatisticsType[], string>({
+    getTestStatistics: build.query<GetTestStatistics, string>({
       query: (userId) => ({
-        url: `/get-statistics/${userId}`,
+        url: `/get-stat?id=${userId}`,
         method: "GET",
       }),
     }),
-    getUsers: build.query<IUsers[], void>({
+    getUsers: build.query<GetUsers, void>({
       query: () => ({
-        url: "/getUsers",
+        url: "/get-all",
         method: "GET",
       }),
     }),
-    getUser: build.query<IUsers, string>({
+    getUser: build.query<GetOneUser, string>({
       query: (userId) => ({
-        url: `/getUser/${userId}`,
+        url: `/get?id=${userId}`,
         method: "GET",
       }),
     }),

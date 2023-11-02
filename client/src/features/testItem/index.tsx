@@ -8,6 +8,7 @@ import { type } from "os";
 
 export default function TestItem({ id, icon, name, description }: TestListT) {
   const { nullCorrectAnswers } = useActions();
+  console.log({ id })
   return (
     <>
       <Test key={id}>

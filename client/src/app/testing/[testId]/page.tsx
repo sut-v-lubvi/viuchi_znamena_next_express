@@ -26,13 +26,13 @@ export default function Test({ params: { testId } }: Props) {
   const [currentTest, setCurrentTest] = useState<ITest | null>(null);
   const [questionTestId, setQuestionTestId] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionType | null>();
-  const [addStatistics, {}] = useAddTestStatisticsMutation();
+  const [addStatistics, { }] = useAddTestStatisticsMutation();
   const { correctAnswers, lengthTest } = useAppSelector(
     (state) => state.testSlice
   );
   useEffect(() => {
     if (data) {
-      setCurrentTest(data);
+      setCurrentTest(data.data.test);
       console.log(data);
     }
   }, [data, testId]);

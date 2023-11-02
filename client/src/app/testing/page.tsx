@@ -16,14 +16,15 @@ export type ITestWithoutQuestions = Omit<ITest, "questions">;
 
 export default function TestsList() {
   const { data, error } = useGetTestsQuery();
-  console.log(data);
+
   const [testsList, setTestList] = useState<any | null>(null);
 
   useEffect(() => {
     if (data) {
-      setTestList(getTestList(data));
+      setTestList(getTestList(data.data.tests));
     }
   }, [data]);
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       redirect("/auth/login");
@@ -33,9 +34,9 @@ export default function TestsList() {
   return (
     <>
       {testsList &&
-        testsList.map((e: any) => (
+        testsList.map((e: any, index: number) => (
           <TestItem
-            key={e.id}
+            key={`${e.id}-${index}`}
             id={e.id}
             icon={e.icon}
             name={e.name}

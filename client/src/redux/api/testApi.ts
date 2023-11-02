@@ -2,31 +2,43 @@ import { TestType } from "@/shared/ui/BurgerButton/api/testsData/fakeApi/testsDa
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ITest } from "./types";
 
+interface GetAll {
+  data: {
+    tests: ITest[]
+  }
+}
+
+interface GetOne {
+  data: {
+    test: ITest
+  }
+}
+
 export const testApi = createApi({
   reducerPath: "test",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://test-crlu.onrender.com/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/api/test" }),
   tagTypes: ["Test"],
   endpoints: (build) => ({
-    getTests: build.query<ITest[], void>({
+    getTests: build.query<GetAll, void>({
       query: () => ({
-        url: "getTests",
+        url: "/get-all",
       }),
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: "Test" as const, id })),
-              { type: "Test", id: "LIST" },
-            ]
+            ...result.data.tests.map(({ _id }) => ({ type: "Test" as const, id: _id })),
+            { type: "Test", id: "LIST" },
+          ]
           : [{ type: "Test", id: "LIST" }],
     }),
-    getCurrentTest: build.query<ITest, string>({
+    getCurrentTest: build.query<GetOne, string>({
       query: (testId) => ({
-        url: `getTest/${testId}`,
+        url: `?id=${testId}`,
       }),
     }),
     deleteTest: build.mutation<void, string>({
       query: (testId) => ({
-        url: `delete/${testId}`,
+        url: `delete?id=${testId}`,
         method: "DELETE",
       }),
       invalidatesTags: [{ type: "Test", id: "LIST" }],
@@ -34,7 +46,7 @@ export const testApi = createApi({
     addNewTest: build.mutation({
       query({ questions, icon, description, name }) {
         return {
-          url: "addTest",
+          url: "/add",
           method: "POST",
           body: { questions, icon, description, name },
         };
@@ -43,12 +55,12 @@ export const testApi = createApi({
     }),
     updateTest: build.mutation({
       query: ({ id, questions, icon, description, name }) => ({
-        url: `/update/${id}`,
+        url: `/update?id=${id}`,
         method: "PUT",
         body: { name, icon, description, questions },
       }),
       invalidatesTags: [{ type: "Test", id: "LIST" }],
-    }),
+    })
   }),
 });
 export const {

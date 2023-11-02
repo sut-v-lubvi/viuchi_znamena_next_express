@@ -24,12 +24,12 @@
     "concurrently": "^8.2.1",
     "config": "^3.3.9",
     "eslint": "8.48.0",
-    "eslint-config-next": "13.4.19",
+    "eslint-config-next": "14.0.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.3",
-    "next": "^13.4.19",
+    "next": "14.0.1",
     "nodemon": "^3.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -40,7 +40,8 @@
     "styled-components": "^6.0.7",
     "typescript": "5.2.2",
     "ui-kit-storybook": "^0.0.0",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "mongodb": "6.2.0"
   },
   "devDependencies": {
     "@swc/plugin-styled-components": "^1.5.83",

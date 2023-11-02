@@ -15,16 +15,18 @@ export default function ProfileLayout({
   const { token, userId } = useAuth();
 
   const { data } = useGetUserQuery(userId);
+
+  console.log({ data })
   return (
     <>
       {data && (
         <Container>
           <ContainerInfo>
-            {" "}
-            <Avatar alt="Remy Sharp" sx={{ width: 130, height: 130 }}>
+            Статистика
+            {/* <Avatar alt="Remy Sharp" sx={{ width: 130, height: 130 }}>
               {" "}
-              <img src={`../../${data.avatar.path}`}></img>
-            </Avatar>
+              <img src={`../../${data.avatar?.path}`}></img>
+            </Avatar> */}
             <Title>{data.email}</Title>
             <Correct>
               <IconButton

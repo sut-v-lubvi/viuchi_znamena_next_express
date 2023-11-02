@@ -7,12 +7,11 @@ import { Line } from "@/app/testing/style";
 
 export const UserStatistics = ({ userId }: any) => {
   const { data } = useGetTestStatisticsQuery(userId);
-  console.log(data);
   return (
     <>
       {data && (
         <Container>
-          {data.map((e) => (
+          {data.data.stat?.map((e) => (
             <Item key={e.testId}>
               <Title>{e.name}</Title>
               <Result>
